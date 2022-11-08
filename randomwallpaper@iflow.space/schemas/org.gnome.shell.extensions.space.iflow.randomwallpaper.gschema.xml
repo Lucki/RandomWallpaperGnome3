@@ -44,8 +44,8 @@
             <range min='0' max='23'/>
         </key>
 
-        <key name='source' enum='org.gnome.shell.extensions.space.iflow.randomwallpaper.sources'>
-            <default>'unsplash'</default>
+        <key type='i' name='source'>
+            <default>0</default>
             <summary>Wallpaper Source</summary>
             <description>Describes the adapter that will be used.</description>
         </key>
@@ -124,19 +124,16 @@
                 quality.
             </description>
         </key>
-
-        <key name='unsplash-constraint-type' enum='org.gnome.shell.extensions.space.iflow.randomwallpaper.unsplash.constraints'>
-            <default>'unconstrained'</default>
+        <key type='i' name='unsplash-constraint-type'>
+            <default>0</default>
             <summary>Constraint Type</summary>
             <description>The constraint of the Unsplash Source API.</description>
         </key>
-
         <key type='s' name='unsplash-constraint-value'>
             <default>""</default>
             <summary>Constraint Value</summary>
             <description>This value should match the constraint type for. Has no effect in the case of an unconstrained search.</description>
         </key>
-
     </schema>
 
     <schema path="/org/gnome/shell/extensions/space-iflow-randomwallpaper/wallhaven/"
@@ -205,20 +202,55 @@
 
     <schema path="/org/gnome/shell/extensions/space-iflow-randomwallpaper/genericJSON/"
             id='org.gnome.shell.extensions.space.iflow.randomwallpaper.genericJSON'>
+        <key type='s' name='generic-json-id'>
+            <default>""</default>
+            <summary>Identifier</summary>
+            <description>Identifier for this source.</description>
+        </key>
+        <key type='s' name='generic-json-domain'>
+            <default>""</default>
+            <summary>Website URL</summary>
+            <description>Main domain for this source.</description>
+        </key>
         <key type='s' name='generic-json-request-url'>
             <default>""</default>
             <summary>The request URL</summary>
             <description>The URL where the JSON will be requested.</description>
         </key>
-        <key type='s' name='generic-json-response-path'>
+        <key type='s' name='generic-json-image-path'>
             <default>""</default>
-            <summary>JSON Path</summary>
+            <summary>Image JSON Path</summary>
             <description>The JSON path that describes the picture URL.</description>
         </key>
-        <key type='s' name='generic-json-url-prefix'>
+        <key type='s' name='generic-json-image-prefix'>
             <default>""</default>
             <summary>Image URL prefix</summary>
             <description>This prefix is added to the final image URL.</description>
+        </key>
+        <key type='s' name='generic-json-post-path'>
+            <default>""</default>
+            <summary>Post JSON Path</summary>
+            <description>The JSON path that describes the post link.</description>
+        </key>
+        <key type='s' name='generic-json-post-prefix'>
+            <default>""</default>
+            <summary>Post URL prefix</summary>
+            <description>This prefix is added to the post link.</description>
+        </key>
+        <key type='s' name='generic-json-author-name-path'>
+            <default>""</default>
+            <summary>Author name JSON Path</summary>
+            <description>The JSON path that describes the author name path.</description>
+        </key>
+        <key type='s' name='generic-json-author-url-path'>
+            <default>""</default>
+            <summary>Author link JSON Path</summary>
+            <description>The JSON path that describes the author link path.</description>
+        </key>
+        <key type='s' name='generic-json-author-url-prefix'>
+            <default>""</default>
+            <summary>Author link URL prefix</summary>
+            <description>This prefix is added to the final author link.</description>
         </key>
     </schema>
 
