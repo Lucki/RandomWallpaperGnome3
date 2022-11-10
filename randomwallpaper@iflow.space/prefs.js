@@ -4,10 +4,9 @@ const Gtk = imports.gi.Gtk;
 const ExtensionUtils = imports.misc.extensionUtils;
 
 const Self = ExtensionUtils.getCurrentExtension();
-
 const Convenience = Self.imports.convenience;
 const SourceRow = Self.imports.ui.source_row;
-const Timer = Self.imports.timer;
+
 const WallpaperController = Self.imports.wallpaperController;
 
 const RWG_SETTINGS_SCHEMA = 'org.gnome.shell.extensions.space.iflow.randomwallpaper';
@@ -84,10 +83,6 @@ var RandomWallpaperSettings = class {
 
 		window.connect('close-request', () => {
 			this._saveSources();
-
-			// Restart timer on window close event
-			let timer = new Timer.AFTimer();
-			timer.start();
 		});
 
 		window.add(this._builder.get_object('page_general'));
