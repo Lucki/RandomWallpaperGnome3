@@ -11,8 +11,8 @@ var Settings = class {
 	 * @param [schema]
 	 * @private
 	 */
-	constructor(schema) {
-		this._settings = Convenience.getSettings(schema);
+	constructor(schema, path = null) {
+		this._settings = Convenience.getSettings(schema, path);
 	}
 
 	observe(key, callback) {

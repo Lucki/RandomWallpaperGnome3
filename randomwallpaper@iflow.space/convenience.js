@@ -61,7 +61,7 @@ function initTranslations(domain) {
  * in extensionsdir/schemas. If @schema is not provided, it is taken from
  * metadata['settings-schema'].
  */
-function getSettings(schema) {
+function getSettings(schema, path = null) {
 	let extension = ExtensionUtils.getCurrentExtension();
 
 	schema = schema || extension.metadata['settings-schema'];
@@ -86,6 +86,10 @@ function getSettings(schema) {
 	if (!schemaObj)
 		throw new Error('Schema ' + schema + ' could not be found for extension '
 			+ extension.metadata.uuid + '. Please check your installation.');
+
+	if (path !== null) {
+		return new Gio.Settings({settings_schema: schemaObj, path: path});
+	}
 
 	return new Gio.Settings({settings_schema: schemaObj});
 }
