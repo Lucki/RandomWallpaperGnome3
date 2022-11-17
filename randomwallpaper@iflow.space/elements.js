@@ -5,23 +5,26 @@ const Util = imports.misc.util;
 const GdkPixbuf = imports.gi.GdkPixbuf;
 const Clutter = imports.gi.Clutter;
 const Cogl = imports.gi.Cogl;
+const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
 
 const Self = imports.misc.extensionUtils.getCurrentExtension();
+const Settings = Self.imports.settings;
 const LoggerModule = Self.imports.logger;
 const Timer = Self.imports.timer;
 
 var HistoryElement = GObject.registerClass({
-			 GTypeName: 'HistoryElement',
-	 }, class HistoryElement extends PopupMenu.PopupSubMenuMenuItem {
-				_init(historyEntry, index) {
+	GTypeName: 'HistoryElement',
+}, class HistoryElement extends PopupMenu.PopupSubMenuMenuItem {
+	_init(historyEntry, index) {
 		super._init("", false);
 		this.logger = new LoggerModule.Logger('RWG3', 'HistoryElement');
 		this.historyEntry = null;
 		this.setAsWallpaperItem = null;
 		this.previewItem = null;
 		this._previewActor = null;
+		this._settings = new Settings.Settings();
 
 		let timestamp = historyEntry.timestamp;
 		let date = new Date(timestamp);
@@ -98,17 +101,46 @@ var HistoryElement = GObject.registerClass({
 			this.menu.addMenuItem(new PopupMenu.PopupMenuItem('Unknown source.'));
 		}
 
+		this.copyToFavorites = new PopupMenu.PopupMenuItem('Save for later');
+		this.copyToFavorites.connect('activate', () => {
+			let sourceFile = Gio.File.new_for_path(this.historyEntry.path);
+			let targetFolder = Gio.File.new_for_path(this._settings.get('favorites-folder', 'string'));
+			let targetFile = targetFolder.get_child(historyEntry.name);
+
+			try {
+				if (!targetFolder.make_directory_with_parents(null)) {
+					this.logger.warning('Could not create directories.');
+					return;
+				}
+			} catch (error) {
+				if (error === Gio.IOErrorEnum.EXISTS) { }
+			}
+
+			try {
+				if (!sourceFile.copy(targetFile, Gio.FileCopyFlags.NONE, null, null)) {
+					this.logger.warning('Failed copying image.');
+					return;
+				}
+			} catch (error) {
+				if (error === Gio.IOErrorEnum.EXISTS) {
+					this.logger.warning('Image already exists in location.');
+					return;
+				}
+			}
+		});
+		this.menu.addMenuItem(this.copyToFavorites);
+
 		this.setAsWallpaperItem = new PopupMenu.PopupMenuItem('Set As Wallpaper');
 		this.setAsWallpaperItem.connect('activate', () => {
 			this.emit('activate', null); // Fixme: not sure what the second parameter should be. null seems to work fine for now.
 		});
 
 		if (index !== 0) {
-			this.menu.addMenuItem(new PopupMenu.PopupBaseMenuItem({can_focus: false, reactive: false})); // theme independent spacing
+			this.menu.addMenuItem(new PopupMenu.PopupBaseMenuItem({ can_focus: false, reactive: false })); // theme independent spacing
 			this.menu.addMenuItem(this.setAsWallpaperItem);
 		}
 
-		this.previewItem = new PopupMenu.PopupBaseMenuItem({can_focus: false, reactive: false});
+		this.previewItem = new PopupMenu.PopupBaseMenuItem({ can_focus: false, reactive: false });
 		this.menu.addMenuItem(this.previewItem);
 
 		/*
@@ -134,7 +166,7 @@ var HistoryElement = GObject.registerClass({
 						height,
 						pixbuf.get_rowstride()
 					);
-					this._previewActor = new Clutter.Actor({height: height, width: width});
+					this._previewActor = new Clutter.Actor({ height: height, width: width });
 					this._previewActor.set_content(image);
 
 					this.previewItem.actor.add_actor(this._previewActor);
@@ -148,12 +180,12 @@ var HistoryElement = GObject.registerClass({
 	setIndex(index) {
 		this.prefixLabel.set_text(String(index));
 	}
-	 }
+}
 );
 
 var CurrentImageElement = GObject.registerClass({
-			 GTypeName: 'CurrentImageElement',
-	 }, class CurrentImageElement extends HistoryElement {
+	GTypeName: 'CurrentImageElement',
+}, class CurrentImageElement extends HistoryElement {
 
 	_init(historyElement) {
 		super._init(historyElement, 0);
@@ -173,8 +205,8 @@ var CurrentImageElement = GObject.registerClass({
  * @type {Lang.Class}
  */
 var NewWallpaperElement = GObject.registerClass({
-			 GTypeName: 'NewWallpaperElement',
-	 }, class NewWallpaperElement extends PopupMenu.PopupBaseMenuItem {
+	GTypeName: 'NewWallpaperElement',
+}, class NewWallpaperElement extends PopupMenu.PopupBaseMenuItem {
 
 	_init(params) {
 		super._init(params);
