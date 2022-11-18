@@ -109,7 +109,7 @@ var HistoryElement = GObject.registerClass({
 
 			try {
 				if (!targetFolder.make_directory_with_parents(null)) {
-					this.logger.warning('Could not create directories.');
+					this.logger.warn('Could not create directories.');
 					return;
 				}
 			} catch (error) {
@@ -118,12 +118,12 @@ var HistoryElement = GObject.registerClass({
 
 			try {
 				if (!sourceFile.copy(targetFile, Gio.FileCopyFlags.NONE, null, null)) {
-					this.logger.warning('Failed copying image.');
+					this.logger.warn('Failed copying image.');
 					return;
 				}
 			} catch (error) {
 				if (error === Gio.IOErrorEnum.EXISTS) {
-					this.logger.warning('Image already exists in location.');
+					this.logger.warn('Image already exists in location.');
 					return;
 				}
 			}
