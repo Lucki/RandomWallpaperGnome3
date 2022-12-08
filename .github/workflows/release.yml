@@ -8,7 +8,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt -q update
-        sudo apt -q install --no-install-recommends npm node-typescript blueprint-compiler zip libglib2.0-0 bash eslint gnome-shell gtk4 libadwaita-1-0
+        sudo apt -q install --no-install-recommends npm node-typescript blueprint-compiler zip libglib2.0-0 bash eslint gnome-shell libgtk-4-bin libgtk-4-common libgtk-4-dev libadwaita-1-0
     - name: Check out repository code
       uses: actions/checkout@v3
     - name: Run build script
