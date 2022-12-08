@@ -8,14 +8,15 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt -q update
-        sudo apt -q install --no-install-recommends npm node-typescript blueprint-compiler zip libglib2.0-0 bash eslint gnome-shell libgtk-4-bin libgtk-4-common libgtk-4-dev libadwaita-1-0 libadwaita-1-dev
+        sudo apt -q install --no-install-recommends npm blueprint-compiler zip libglib2.0-0 bash gnome-shell libgtk-4-bin libgtk-4-common libgtk-4-dev libadwaita-1-0 libadwaita-1-dev
     - name: Check out repository code
       uses: actions/checkout@v3
     - name: Ubuntu specific workarounds
       run: |
         cd ${{github.workspace}}
-        npm install -g npm@latest
-        npm install --save-dev mkdirp
+        npm bin -g
+        npm install -g npm@latest typescript@latest eslint@latest
+        export PATH=$PATH:$(npm bin -g)
         sed -i -E 's#(blueprint-compiler .*)#\1 || true#g' ${{github.workspace}}/build.sh
     - name: Run build script
       run: /usr/bin/env bash ${{github.workspace}}/build.sh
