@@ -8,7 +8,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt -q update
-        sudo apt -q install --no-install-recommends npm node-typescript blueprint-compiler zip libglib2.0 bash eslint gnome-shell
+        sudo apt -q install --no-install-recommends npm node-typescript blueprint-compiler zip libglib2.0-0 bash eslint gnome-shell
     - name: Check out repository code
       uses: actions/checkout@v3
     - name: Run build script
