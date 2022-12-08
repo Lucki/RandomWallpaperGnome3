@@ -52,7 +52,7 @@ install_npm "@typescript-eslint/parser"
 install_npm "eslint-plugin-jsdoc"
 
 # Delete output directory, everything will be rewritten
-rm -r "$DESTDIR" || true
+rm -r "$DESTDIR" &>/dev/null || true
 
 # Compile UI files
 blueprint-compiler batch-compile "$DESTDIR/ui" "$SRCDIR/ui" "$SRCDIR"/ui/*.blp
