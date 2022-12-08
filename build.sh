@@ -55,7 +55,7 @@ install_npm "eslint-plugin-jsdoc"
 rm -r "$DESTDIR" &>/dev/null || true
 
 # Compile UI files
-blueprint-compiler batch-compile "$DESTDIR/ui" "$SRCDIR/ui" "$SRCDIR"/ui/*.blp || true
+blueprint-compiler batch-compile "$DESTDIR/ui" "$SRCDIR/ui" "$SRCDIR"/ui/*.blp
 
 # TypeScript to JavaScript, config in tsconfig.json
 tsc
