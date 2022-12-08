@@ -37,7 +37,7 @@ install_npm() {
 check_command "blueprint-compiler"
 check_command "eslint"
 check_command "glib-compile-schemas"
-check_command "gnome-extension"
+check_command "gnome-extensions"
 check_command "npm"
 check_command "tsc"
 check_command "zip"
