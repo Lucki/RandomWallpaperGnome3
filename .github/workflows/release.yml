@@ -1,0 +1,19 @@
+name: Build and create ZIP
+run-name: Generate javascript, ui and schema to publish
+on: [push, pull_request]
+jobs:
+  test:
+   runs-on: ubuntu-latest
+   steps:
+    - name: Install dependencies
+      run: |
+        sudo apt -q update
+        sudo apt -q install --no-install-recommends npm node-typescript blueprint-compiler zip glib2.0 bash eslint gnome-shell
+    - name: Check out repository code
+      uses: actions/checkout@v3
+    - name: Run build script
+      run: /usr/bin/env bash ${{github.workspace}}/build.sh
+    - uses: actions/upload-artifact@v3
+      with:
+        name: randomwallpaper@iflow.space.shell-extension.zip
+        path: ${{github.workspace}}/randomwallpaper@iflow.space.shell-extension.zip
