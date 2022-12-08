@@ -15,7 +15,7 @@ jobs:
       run: |
         sed -i -E 's#(blueprint-compiler .*)#\1 || true#g' ${{github.workspace}}/build.sh
         cd ${{github.workspace}}
-        npm install --save-dev --silent mkdirp &>/dev/null
+        sudo npm install -g --save-dev mkdirp
     - name: Run build script
       run: /usr/bin/env bash ${{github.workspace}}/build.sh
     - uses: actions/upload-artifact@v3
