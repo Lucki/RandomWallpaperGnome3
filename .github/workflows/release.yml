@@ -5,23 +5,14 @@ jobs:
   check-typescript:
     runs-on: ubuntu-latest
     steps:
-      - name: Install dependencies
-        run: |
-          sudo apt -q update
-          sudo apt -q install --no-install-recommends npm
-          cd ${{github.workspace}}
-          export PATH=$PATH:$(npm bin -g)
-          npm install --save eslint
-          npm install --save typescript
-          npm install --save eslint-plugin-jsdoc
-          npm install --save @typescript-eslint/eslint-plugin
-          npm install --save @typescript-eslint/parser
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - name: Run ESLint
-        run: |
-          cd ${{github.workspace}}
-          npx eslint "${{github.workspace}}/src/**/*.ts"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci # or yarn install
+      - uses: sibiraj-s/action-eslint@v2
+        with:
+          eslint-args: '${{github.workspace}}/src/**/*.ts'
   build:
    runs-on: ubuntu-latest
    steps:
