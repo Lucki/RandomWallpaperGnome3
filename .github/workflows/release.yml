@@ -12,6 +12,7 @@ jobs:
       - uses: sibiraj-s/action-eslint@v2
         with:
           eslint-args: '${{github.workspace}}/src/**/*.ts'
+          extensions: 'ts'
   build:
    runs-on: ubuntu-latest
    steps:
