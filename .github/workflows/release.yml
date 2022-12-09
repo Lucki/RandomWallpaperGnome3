@@ -14,6 +14,8 @@ jobs:
           npm install --save-dev --silent "@typescript-eslint/eslint-plugin" &>/dev/null
           npm install --save-dev --silent "@typescript-eslint/parser" &>/dev/null
           npm install --save-dev --silent "eslint-plugin-jsdoc" &>/dev/null
+      - name: Check out repository code
+        uses: actions/checkout@v3
       - name: Run ESLint
         run: |
           cd ${{github.workspace}}
