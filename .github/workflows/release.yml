@@ -21,7 +21,7 @@ jobs:
       - name: Run ESLint
         run: |
           cd ${{github.workspace}}
-          eslint --resolve-plugins-relative-to ${{github.workspace}} "${{github.workspace}}/src/**/*.ts"
+          node "${{github.workspace}}/node_modueslint/eslint/bin/eslint.js" "${{github.workspace}}/src/**/*.ts"
   build:
    runs-on: ubuntu-latest
    steps:
