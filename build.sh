@@ -41,7 +41,7 @@ check_command "gnome-extensions"
 check_command "npm"
 check_command "tsc"
 check_command "zip"
-# only used for type checking
+# type checking
 install_npm "@gi-types/base-types"
 install_npm "@gi-types/gjs-environment"
 install_npm "@gi-types/gtk4-types"
