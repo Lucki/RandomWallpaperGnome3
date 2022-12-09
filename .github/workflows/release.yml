@@ -10,7 +10,7 @@ jobs:
           sudo apt -q update
           sudo apt -q install --no-install-recommends npm
           cd ${{github.workspace}}
-          export PATH=$PATH:$(npm bin)
+          export PATH=$PATH:$(npm bin -g)
           npm install --save eslint
           npm install --save typescript
           npm install --save eslint-plugin-jsdoc
@@ -21,7 +21,7 @@ jobs:
       - name: Run ESLint
         run: |
           cd ${{github.workspace}}
-          node "${{github.workspace}}/node_modueslint/eslint/bin/eslint.js" "${{github.workspace}}/src/**/*.ts"
+          npx eslint "${{github.workspace}}/src/**/*.ts"
   build:
    runs-on: ubuntu-latest
    steps:
