@@ -35,11 +35,11 @@ jobs:
           sudo rm /usr/lib/x86_64-linux-gnu/libadwaita-1.so
           sudo rm /usr/share/gir-1.0/Adw-1.gir
           sudo rm /usr/lib/x86_64-linux-gnu/pkgconfig/libadwaita-1.pc
-          sudo mv ${{github.workspace}}/.github/workflows/Adw-1.typelib /usr/lib/x86_64-linux-gnu/girepository-1.0/
-          sudo mv ${{github.workspace}}/.github/workflows/libadwaita-1 /usr/include/
-          sudo mv ${{github.workspace}}/.github/workflows/libadwaita-1.so.0 /usr/lib/x86_64-linux-gnu/
-          sudo mv ${{github.workspace}}/.github/workflows/libadwaita-1.pc /usr/lib/x86_64-linux-gnu/pkgconfig/libadwaita-1.pc
-          sudo mv ${{github.workspace}}/.github/workflows/Adw-1.gir /usr/share/gir-1.0/Adw-1.gir
+          sudo mv ${{github.workspace}}/.github/workflows/ubuntu/Adw-1.typelib /usr/lib/x86_64-linux-gnu/girepository-1.0/
+          sudo mv ${{github.workspace}}/.github/workflows/ubuntu/libadwaita-1 /usr/include/
+          sudo mv ${{github.workspace}}/.github/workflows/ubuntu/libadwaita-1.so.0 /usr/lib/x86_64-linux-gnu/
+          sudo mv ${{github.workspace}}/.github/workflows/ubuntu/libadwaita-1.pc /usr/lib/x86_64-linux-gnu/pkgconfig/libadwaita-1.pc
+          sudo mv ${{github.workspace}}/.github/workflows/ubuntu/Adw-1.gir /usr/share/gir-1.0/Adw-1.gir
       - name: Run build script
         run: /usr/bin/env bash ${{github.workspace}}/build.sh
       - uses: actions/upload-artifact@v3
