@@ -9,7 +9,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci # or yarn install
       - uses: sibiraj-s/action-eslint@v2
         with:
           eslint-args: '${{github.workspace}}/src/**/*.ts'
