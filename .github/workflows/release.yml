@@ -22,7 +22,7 @@ jobs:
       - name: Run ESLint
         run: |
           cd ${{github.workspace}}
-          eslint "src/**/*.ts"
+          eslint --resolve-plugins-relative-to ${{github.workspace}} "${{github.workspace}}/src/**/*.ts"
   build:
    runs-on: ubuntu-latest
    steps:
