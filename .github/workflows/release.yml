@@ -2,16 +2,6 @@ name: Build and create ZIP
 run-name: Generate javascript, ui and schema to publish
 on: [push, pull_request]
 jobs:
-  check-typescript:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - uses: sibiraj-s/action-eslint@v2
-        with:
-          extensions: 'ts'
   build:
    runs-on: ubuntu-latest
    steps:
