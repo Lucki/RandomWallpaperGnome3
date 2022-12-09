@@ -102,3 +102,6 @@ for file in "$DESTDIR"/*; do
 done
 
 gnome-extensions pack --force "${extra_source[@]}" "$DESTDIR"
+
+# the pack command already compiles the schemas but we also want to run from a folder so do it again
+glib-compile-schemas "$DESTDIR/schemas"

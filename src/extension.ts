@@ -61,10 +61,10 @@ class Extension {
         // PopOS' tiling extension and RoundedCorners Extension work around the above limitation by
         // manually rewriting the exported javascript file. We also have to do this but
         // not for our own modules.
-        const loggerPromise = import('./logger');
-        const timerPromise = import('./timer');
-        const wallpaperPromise = import('./wallpaperController');
-        const menuPromise = import('./randomWallpaperMenu');
+        const loggerPromise = import('./logger.js');
+        const timerPromise = import('./timer.js');
+        const wallpaperPromise = import('./wallpaperController.js');
+        const menuPromise = import('./randomWallpaperMenu.js');
 
         const [moduleLogger, moduleTimer, moduleWallpaper, moduleMenu] = await Promise.all([
             loggerPromise, timerPromise, wallpaperPromise, menuPromise,

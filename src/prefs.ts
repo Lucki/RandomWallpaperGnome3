@@ -141,7 +141,7 @@ class RandomWallpaperSettings {
                 });
             });
 
-            import('./hydraPaper').then(module => {
+            import('./hydraPaper.js').then(module => {
                 if (new module.HydraPaper().isAvailable())
                     // eslint-disable-next-line no-extra-parens
                     (this._builder.get_object('multiple_displays_row') as Adw.ActionRow).set_sensitive(true);
@@ -162,10 +162,10 @@ class RandomWallpaperSettings {
         // PopOS' tiling extension and RoundedCorners Extension work around the above limitation by
         // manually rewriting the exported javascript file. We also have to do this but
         // not for our own modules.
-        const loggerPromise = import('./logger');
-        const utilsPromise = import('./utils');
-        const sourceRowPromise = import('./ui/sourceRow');
-        const settingsPromise =  import('./settings');
+        const loggerPromise = import('./logger.js');
+        const utilsPromise = import('./utils.js');
+        const sourceRowPromise = import('./ui/sourceRow.js');
+        const settingsPromise =  import('./settings.js');
 
         const [moduleLogger, moduleUtils, moduleSourceRow, moduleSettings] = await Promise.all(
             [loggerPromise, utilsPromise, sourceRowPromise, settingsPromise]);
