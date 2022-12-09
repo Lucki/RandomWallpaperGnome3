@@ -15,6 +15,9 @@ jobs:
         run: |
           cd ${{github.workspace}} || exit 1
           npm --silent ci
+      - name: Check TypeScript
+        run: |
+          cd ${{github.workspace}} || exit 1
           npx eslint ${{github.workspace}}/src/**/*.ts
   build:
     runs-on: ubuntu-latest
