@@ -11,9 +11,10 @@ jobs:
           sudo apt -q install --no-install-recommends npm
           npm install -g npm@latest typescript@latest eslint@latest
           export PATH=$PATH:$(npm bin -g)
-          npm install --save-dev --silent "@typescript-eslint/eslint-plugin" &>/dev/null
-          npm install --save-dev --silent "@typescript-eslint/parser" &>/dev/null
-          npm install --save-dev --silent "eslint-plugin-jsdoc" &>/dev/null
+          cd ${{github.workspace}}
+          npm install --save-dev "@typescript-eslint/eslint-plugin"
+          npm install --save-dev "@typescript-eslint/parser"
+          npm install --save-dev "eslint-plugin-jsdoc"
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Run ESLint
