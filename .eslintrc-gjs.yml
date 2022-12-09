@@ -259,6 +259,9 @@ rules:
       prev: function
       next: class
     - blankLine: always
+      prev: class
+      next: class
+    - blankLine: always
       prev: import
       next: function
     - blankLine: always

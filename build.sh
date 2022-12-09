@@ -26,30 +26,15 @@ check_command() {
     fi
 }
 
-install_npm() {
-    if ! npm list --silent "$1" &>/dev/null; then
-        # --save is needed so the types are registered by tsc
-        npm install --save-dev --silent "$1" &>/dev/null
-    fi
-}
-
 # Setup environment
 check_command "blueprint-compiler"
-check_command "eslint"
 check_command "glib-compile-schemas"
 check_command "gnome-extensions"
 check_command "npm"
-check_command "tsc"
 check_command "zip"
-# type checking
-install_npm "@gi-types/base-types"
-install_npm "@gi-types/gjs-environment"
-install_npm "@gi-types/gtk4-types"
-install_npm "@gi-types/shell"
-# linting and code styling
-install_npm "@typescript-eslint/eslint-plugin"
-install_npm "@typescript-eslint/parser"
-install_npm "eslint-plugin-jsdoc"
+
+# install, config in package.json
+npm --silent install
 
 # Delete output directory, everything will be rewritten
 rm -r "$DESTDIR" &>/dev/null || true
@@ -58,7 +43,7 @@ rm -r "$DESTDIR" &>/dev/null || true
 blueprint-compiler batch-compile "$DESTDIR/ui" "$SRCDIR/ui" "$SRCDIR"/ui/*.blp
 
 # TypeScript to JavaScript, config in tsconfig.json
-tsc
+npx --silent tsc
 
 # rewrite imports to gjs own module system
 shopt -s globstar nullglob
@@ -87,7 +72,7 @@ done
 sed -i -E "s#export \{\};##g" "$DESTDIR/extension.js"
 
 # Format js using the official gjs stylesheet and a few manual quirks
-eslint --config "$SCRIPTDIR/.eslintrc-gjs.yml" --fix "$DESTDIR/**/*.js"
+npx --silent eslint --config "$SCRIPTDIR/.eslintrc-gjs.yml" --fix "$DESTDIR/**/*.js"
 
 # Copy non generated files to destdir
 mkdir -p "$DESTDIR/schemas/"
