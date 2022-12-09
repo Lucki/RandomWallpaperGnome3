@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt -q update
-          sudo apt -q install --no-install-recommends npm blueprint-compiler zip libglib2.0-0 bash gnome-shell libgtk-4-bin libgtk-4-common libgtk-4-dev libadwaita-1-0 libadwaita-1-dev
+          sudo apt -q install --no-install-recommends npm blueprint-compiler libglib2.0-0 bash gnome-shell libgtk-4-bin libgtk-4-common libgtk-4-dev libadwaita-1-0 libadwaita-1-dev
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Ubuntu specific workarounds

@@ -31,7 +31,6 @@ check_command "blueprint-compiler"
 check_command "glib-compile-schemas"
 check_command "gnome-extensions"
 check_command "npm"
-check_command "zip"
 
 # install, config in package.json
 npm --silent install
