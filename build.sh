@@ -21,7 +21,7 @@ cd "$SCRIPTDIR" || exit 1
 
 check_command() {
     if ! command -v "$1" &>/dev/null; then
-        echo "Please install \"$1\""
+        echo "Please install \"$1\" and make sure it's available in your \$PATH"
         exit 1
     fi
 }

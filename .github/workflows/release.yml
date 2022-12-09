@@ -2,6 +2,22 @@ name: Build and create ZIP
 run-name: Generate javascript, ui and schema to publish
 on: [push, pull_request]
 jobs:
+  check-typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt -q update
+          sudo apt -q install --no-install-recommends npm
+          npm install -g npm@latest typescript@latest eslint@latest
+          export PATH=$PATH:$(npm bin -g)
+          npm install --save-dev --silent "@typescript-eslint/eslint-plugin" &>/dev/null
+          npm install --save-dev --silent "@typescript-eslint/parser" &>/dev/null
+          npm install --save-dev --silent "eslint-plugin-jsdoc" &>/dev/null
+      - name: Run ESLint
+        run: |
+          cd ${{github.workspace}}
+          eslint "src"
   build:
    runs-on: ubuntu-latest
    steps:
@@ -13,8 +29,6 @@ jobs:
       uses: actions/checkout@v3
     - name: Ubuntu specific workarounds
       run: |
-        cd ${{github.workspace}}
-        npm bin -g
         npm install -g npm@latest typescript@latest eslint@latest
         export PATH=$PATH:$(npm bin -g)
         sed -i -E 's#(blueprint-compiler .*)#\1 || true#g' ${{github.workspace}}/build.sh
@@ -23,4 +37,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: randomwallpaper@iflow.space.shell-extension.zip
-        path: ${{github.workspace}}/randomwallpaper@iflow.space.shell-extension.zip
+        path: ${{github.workspace}}/randomwallpaper@iflow.space
