@@ -25,12 +25,13 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt -q update
-          sudo apt -q install --no-install-recommends npm blueprint-compiler libglib2.0-0 bash gnome-shell libgtk-4-bin libgtk-4-common libgtk-4-dev libadwaita-1-dev gir1.2-adw-1
+          sudo apt -q install --no-install-recommends npm blueprint-compiler libglib2.0-0 bash gnome-shell libgtk-4-bin libgtk-4-common libgtk-4-dev libadwaita-1-dev gir1.2-adw-1 gir1.2-gtk-4.0
       - name: Check out repository code
         uses: actions/checkout@v3
-      # - name: Ubuntu specific workarounds
-        # run: |
-          # sudo cp ${{github.workspace}}/.github/workflows/Adw-1.typelib /usr/lib/x86_64-linux-gnu/girepository-1.0/
+      - name: Ubuntu specific workarounds
+        run: |
+          sudo rm /usr/lib/x86_64-linux-gnu/girepository-1.0/Adw-1.typelib
+          sudo cp ${{github.workspace}}/.github/workflows/Adw-1.typelib /usr/lib/x86_64-linux-gnu/girepository-1.0/
       - name: Run build script
         run: /usr/bin/env bash ${{github.workspace}}/build.sh
       - uses: actions/upload-artifact@v3
