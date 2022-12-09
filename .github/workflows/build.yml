@@ -30,7 +30,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Ubuntu specific workarounds
         run: |
-          sed -i -E 's#(blueprint-compiler .*)#\1 || true#g' ${{github.workspace}}/build.sh
+          # sed -i -E 's#(blueprint-compiler .*)#\1 || true#g' ${{github.workspace}}/build.sh
+          sudo cp ${{github.workspace}}.github/workflows/Adw-1.typelib /usr/lib64/girepository-1.0/
       - name: Run build script
         run: /usr/bin/env bash ${{github.workspace}}/build.sh
       - uses: actions/upload-artifact@v3
