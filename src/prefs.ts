@@ -145,7 +145,7 @@ class RandomWallpaperSettings {
                 if (new module.HydraPaper().isAvailable())
                     // eslint-disable-next-line no-extra-parens
                     (this._builder.get_object('multiple_displays_row') as Adw.ActionRow).set_sensitive(true);
-            }).catch(error => logError(error));
+            }).catch(logError);
         }).catch(error => {
             logError(error);
             throw error;
@@ -157,7 +157,7 @@ class RandomWallpaperSettings {
      * Allows proper async/await in imported modules.
      */
     private async _importModules() {
-        // Chain all imports as dynamic loads to work around the fact this module won't be in a topmost
+        // All imports as dynamic loads to work around the fact this module won't be in a topmost
         // context inside the gnome shell and can't use import statements (yet).
         // PopOS' tiling extension and RoundedCorners Extension work around the above limitation by
         // manually rewriting the exported javascript file. We also have to do this but
