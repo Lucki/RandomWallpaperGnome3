@@ -13,12 +13,10 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup environment
         run: |
-          cd ${{github.workspace}} || exit 1
-          npm --silent ci
+          ${{github.workspace}}/build.sh setup_env
       - name: Check TypeScript
         run: |
-          cd ${{github.workspace}} || exit 1
-          npx eslint ${{github.workspace}}/src/**/*.ts
+          ${{github.workspace}}/build.sh check
   build:
     runs-on: ubuntu-latest
     steps:
@@ -40,8 +38,10 @@ jobs:
           sudo mv ${{github.workspace}}/.github/workflows/ubuntu/libadwaita-1.so.0 /usr/lib/x86_64-linux-gnu/
           sudo mv ${{github.workspace}}/.github/workflows/ubuntu/libadwaita-1.pc /usr/lib/x86_64-linux-gnu/pkgconfig/libadwaita-1.pc
           sudo mv ${{github.workspace}}/.github/workflows/ubuntu/Adw-1.gir /usr/share/gir-1.0/Adw-1.gir
-      - name: Run build script
-        run: /usr/bin/env bash ${{github.workspace}}/build.sh
+      - run: ${{github.workspace}}/build.sh setup_env
+      - run: ${{github.workspace}}/build.sh build
+      - run: ${{github.workspace}}/build.sh format
+      - run: ${{github.workspace}}/build.sh copy_static
       - uses: actions/upload-artifact@v3
         with:
           name: randomwallpaper@iflow.space.shell-extension.zip

@@ -14,14 +14,14 @@ class SoupBowl {
     private _logger = new Logger('RWG3', 'BaseAdapter');
     private _session = new Soup.Session();
 
-    send_and_receive = (soupMessage: Soup.Message): Promise<Uint8Array> => {
+    send_and_receive(soupMessage: Soup.Message): Promise<Uint8Array> {
         if (Soup.get_major_version() === 2)
             return this._send_and_receive_soup24(soupMessage);
         else if (Soup.get_major_version() === 3)
             return this._send_and_receive_soup30(soupMessage);
         else
             throw new Error('Unknown libsoup version');
-    };
+    }
 
     newGetMessage(uri: string) {
         return Soup.Message.new('GET', uri);

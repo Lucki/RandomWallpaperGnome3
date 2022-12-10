@@ -1,5 +1,5 @@
 {
-  "shell-version": [ "42", "43" ],
+  "shell-version": [ "43" ],
   "uuid": "randomwallpaper@iflow.space",
   "settings-schema": "org.gnome.shell.extensions.space.iflow.randomwallpaper",
   "name": "Random Wallpaper",
