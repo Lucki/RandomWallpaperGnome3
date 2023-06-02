@@ -41,9 +41,9 @@ jobs:
         run: |
           mkdir libadwaita
           cd libadwaita || exit 1
-          wget http://launchpadlibrarian.net/666994844/libadwaita-1-dev_1.3.2-0ubuntu1_amd64.deb
-          wget http://launchpadlibrarian.net/666994840/gir1.2-adw-1_1.3.2-0ubuntu1_amd64.deb
-          wget http://launchpadlibrarian.net/666994847/libadwaita-1-0_1.3.2-0ubuntu1_amd64.deb
+          wget https://launchpad.net/ubuntu/+source/libadwaita-1/1.2.0-1ubuntu2/+build/24480571/+files/gir1.2-adw-1_1.2.0-1ubuntu2_amd64.deb
+          wget https://launchpad.net/ubuntu/+source/libadwaita-1/1.2.0-1ubuntu2/+build/24480571/+files/libadwaita-1-0_1.2.0-1ubuntu2_amd64.deb
+          wget https://launchpad.net/ubuntu/+source/libadwaita-1/1.2.0-1ubuntu2/+build/24480571/+files/libadwaita-1-dev_1.2.0-1ubuntu2_amd64.deb
           sudo dpkg --recursive --install .
       - run: ${{github.workspace}}/build.sh setup_env
       - run: ${{github.workspace}}/build.sh build
