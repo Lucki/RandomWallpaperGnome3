@@ -28,7 +28,7 @@ jobs:
       # https://launchpad.net/ubuntu/+source/blueprint-compiler
       - name: Build recent blueprint-compiler
         run: |
-          sudo apt -q install --no-install-recommends meson ninja
+          sudo apt -q install --no-install-recommends meson ninja-build
           git clone https://gitlab.gnome.org/jwestman/blueprint-compiler.git
           cd blueprint-compiler
           meson _build
