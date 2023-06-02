@@ -32,7 +32,7 @@ jobs:
           git clone https://gitlab.gnome.org/jwestman/blueprint-compiler.git
           cd blueprint-compiler
           meson _build
-          ninja -C _build install
+          sudo ninja -C _build install
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Ubuntu specific workarounds
